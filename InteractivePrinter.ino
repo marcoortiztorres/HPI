@@ -1,13 +1,13 @@
 /* ====================================================
- *     Project : Interactive 3D Printer  
+ *     Project : HPI 
  *      Author : Marco A. Ortiz Torres
  *        Date : November 9, 2016
  * Description : The purpose of this program is to use sensor data
  *               that (specifically a button) to create or alter the
  *               gcode for a printer to print out.
- *   Reference : http://arduinobasics.blogspot.com/2011/06/how-to-append-text-to-txt-file-using.html
+ *   Reference : https://www.arduino.cc/en/Reference/FileWrite
  ==================================================== */
-
+#include <SD.h>
 
 // Pin numbers that will stay constant
 const int button1 = 2;     // the number of the pushbutton pin
