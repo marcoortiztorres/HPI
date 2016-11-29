@@ -10,48 +10,47 @@
  *               https://learn.sparkfun.com/tutorials/connecting-arduino-to-processing
  ==================================================== */
 import processing.serial.*;
-
 Serial mySerial;
 PrintWriter output;
 
 void setup() {
    mySerial = new Serial( this, Serial.list()[0], 9600 );
    output = createWriter( "data.txt" );
+   startCode();
 }
 
 void draw() {
-  
-   String value = mySerial.readString();
-   output.print(value);
-   if (mySerial.available() > 0 ) 
-   {
-       output.print ("G21;");
-       output.print ("G90;");
-       output.print ("M82;");
-       output.print ("M107;");
-       output.print ("G28 X0 Y0;"); 
-       output.print ("G28 Z0;");
-       output.print ("G1 Z15.0 1200;"); 
-       output.print ("G92 E0; ");
-       output.print ("G1 F200 E0;"); 
-       output.print ("G92 E0;"); 
-       output.print ("G1 F{travel_speed};");
-       output.print ("M203 X192 Y208 Z3;");
-       output.print ("M117 Printing...;");
-       /*
-       if (value > 1400) 
-       {
-           output.println( "Move 10" ); // Move 10 X
+   if (mySerial.available() > 0 ) {
+       String value = mySerial.readString();
+         if ( value != null ) {
+           output.println( value );
        }
-       else if (value == 1)
-       {
-           keyPressed();
-       }
-       */
-   }
+    }
 }
 
 void keyPressed() {
+  endCode();
+  output.flush();  // Writes the remaining data to the file
+  output.close();  // Finishes the file
+  exit();  // Stops the program
+}
+
+void startCode(){
+  output.print ("G21;");
+  output.print ("G90;");
+  output.print ("M82;");
+  output.print ("M107;");
+  output.print ("G28 X0 Y0;"); 
+  output.print ("G28 Z0;");
+  output.print ("G1 Z15.0 1200;"); 
+  output.print ("G92 E0; ");
+  output.print ("G1 F200 E0;"); 
+  output.print ("G92 E0;"); 
+  output.print ("G1 F{travel_speed};");
+  output.print ("M203 X192 Y208 Z3;");
+  output.print ("M117 Printing...;");
+}
+void endCode(){
   output.print("M400;");
   output.print ("M104 S0;");
   output.print ("M140 S0;");
@@ -64,8 +63,4 @@ void keyPressed() {
   output.print ("M84;");
   output.print ("G90;");
   output.print ("M117 TAZ Ready.;");
-  
-  output.flush();  // Writes the remaining data to the file
-  output.close();  // Finishes the file
-  exit();  // Stops the program
 }
