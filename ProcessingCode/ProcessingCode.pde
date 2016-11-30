@@ -71,3 +71,19 @@ void endCode(){
   output.print ("G90;");
   output.print ("M117 TAZ Ready.;");
 }
+/* Structure for X Y Z motion */
+void xAxis(int val){
+  output.print ("G1 X");
+  output.print (val);
+  output.print (";");
+}
+void yAxis(int val){
+  output.print ("G1 Y");
+  output.print (val);
+  output.print (";");
+}
+void zAxis(int val){
+  output.print ("G1 Z");
+  output.print (val);
+  output.print (";");
+}
