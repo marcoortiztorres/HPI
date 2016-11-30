@@ -45,21 +45,15 @@ void loop()
   buttonValue3 = digitalRead(ButtonPin3);
   lightValue = analogRead(LightPin);
   
-  if (lightValue < 300 or lightValue > 200){
+  if (lightValue > 300 or lightValue < 200){
     if(buttonValue1 == HIGH){
-      Serial.println("G1 X, ");
-      Serial.println(lightValue);
-      Serial.println(";");
+      Serial.println(lightConversion);
     }
     else if(buttonValue2 == HIGH){
-      Serial.println("G1 Y, ");
-      Serial.println(lightValue);
-      Serial.println(";");
+      Serial.println(lightConversion);
     }
     else if(buttonValue3 == HIGH){
-      Serial.println("G1 Z, ");
-      Serial.println(lightValue);
-      Serial.println(";");
+      Serial.println("End");
     }
   }
 
