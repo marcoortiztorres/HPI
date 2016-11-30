@@ -13,6 +13,8 @@ import processing.serial.*;
 Serial mySerial;
 PrintWriter output;
 
+int circleRad = 0;
+
 void setup() {
    mySerial = new Serial( this, Serial.list()[0], 9600 );
    output = createWriter( "test.gcode" );
@@ -24,6 +26,8 @@ void draw() {
        String value = mySerial.readString();
        if ( value != null && value != "End") {
            output.println( value );
+           circleRad = Integer.parseInt(value)/3; //update data input and calibrate
+           ellipse(displayWidth/2, displayHeight/2, circleRad, circleRad); //draw circle based on data value
        }
        else if (value == "End"){
            endCode();
