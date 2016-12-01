@@ -24,21 +24,22 @@ void setup() {
 }
 
 void draw() {
-
-	background(51);
-   if (mySerial.available() > 0 ) {
-       String value = mySerial.readString();
-       if ( value != null && value != "End") {
+  background(51);
+  if (mySerial.available() > 0 ) {
+       int value = mySerial.read();
+       if ( value >= 0) {
            output.println( value );
-           circleRad = Integer.parseInt(value)/3; //update data input and calibrate
-			  noStrock();
-			  fill(204);
-           ellipse(displayWidth/2, displayHeight/2, circleRadi*2, circleRad*2); //draw circle based on data value
+           circleRad = value; //Integer.parseInt(value)/3; //update data input and calibrate
+           // noStrock();
+           fill(0);
+           ellipse(320, 180, circleRad*2, circleRad*2); //draw circle based on data value
+           //ellipse(10, 180, 200,300); //draw circle based on data value
+       
        }
-       else if (value == "End"){
+       /* else if (value == "End"){
            endCode();
            keyPressed();
-       }
+       }*/
     }
 }
 
