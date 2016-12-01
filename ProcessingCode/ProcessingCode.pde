@@ -16,18 +16,24 @@ PrintWriter output;
 int circleRad = 0;
 
 void setup() {
+
+	size(640, 360); //prepare screen
    mySerial = new Serial( this, Serial.list()[0], 9600 );
    output = createWriter( "data.txt" );
    startCode();
 }
 
 void draw() {
+
+	background(51);
    if (mySerial.available() > 0 ) {
        String value = mySerial.readString();
          if ( value != null ) {
            output.println( value );
            circleRad = Integer.parseInt(value)/3; //update data input and calibrate
-           ellipse(displayWidth/2, displayHeight/2, circleRad, circleRad); //draw circle based on data value
+			  noStrock();
+			  fill(204);
+           ellipse(displayWidth/2, displayHeight/2, circleRadi*2, circleRad*2); //draw circle based on data value
        }
     }
 }
