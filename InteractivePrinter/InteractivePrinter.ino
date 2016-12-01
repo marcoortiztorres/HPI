@@ -14,18 +14,24 @@
  ==================================================== */
 #include <SD.h>
 
-int ButtonPin = A2;
-int LightPin = A3;
-int tempPin = A4;
+int ButtonPin1 = A1;
+int ButtonPin2 = A2;
+int ButtonPin3 = A3;
+int LightPin = A4;
+//int tempPin = A4;
 
-int buttonValue;
+int buttonValue1;
+int buttonValue2;
+int buttonValue3;
 int lightValue;
 
 void setup() 
 {
-  pinMode(ButtonPin, INPUT);
+  pinMode(ButtonPin1, INPUT);
+  pinMode(ButtonPin2, INPUT);
+  pinMode(ButtonPin3, INPUT);
   pinMode(LightPin, INPUT);
-  pinMode(tempPin, INPUT);
+  // pinMode(tempPin, INPUT);
   
   pinMode(A5, OUTPUT);
   digitalWrite(A5, HIGH);
@@ -34,12 +40,22 @@ void setup()
 
 void loop() 
 { 
-  buttonValue = analogRead(ButtonPin)+ 1;
-  //Serial.println(buttonValue);    // Sends the button value
-  lightValue = analogRead(LightPin);// + 1000; // increased it by 1000 to destinguish that it is the data being read by light sensor
-  tempValue = analogRead(tempPin);
+  buttonValue1 = digitalRead(ButtonPin1);
+  buttonValue2 = digitalRead(ButtonPin2);
+  buttonValue3 = digitalRead(ButtonPin3);
+  lightValue = analogRead(LightPin);
+  
+  if (lightValue > 300 or lightValue < 200){
+    if(buttonValue1 == HIGH){
+      Serial.println(lightConversion);
+    }
+    else if(buttonValue2 == HIGH){
+      Serial.println(lightConversion);
+    }
+    else if(buttonValue3 == HIGH){
+      Serial.println("End");
+    }
+  }
 
-   
-  Serial.println(lightValue);     // Sends the sensor data of the light sensor
   delay(200);
 }

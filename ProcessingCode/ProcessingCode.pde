@@ -19,7 +19,7 @@ void setup() {
 
 	size(640, 360); //prepare screen
    mySerial = new Serial( this, Serial.list()[0], 9600 );
-   output = createWriter( "data.txt" );
+   output = createWriter( "test.gcode" );
    startCode();
 }
 
@@ -28,18 +28,21 @@ void draw() {
 	background(51);
    if (mySerial.available() > 0 ) {
        String value = mySerial.readString();
-         if ( value != null ) {
+       if ( value != null && value != "End") {
            output.println( value );
            circleRad = Integer.parseInt(value)/3; //update data input and calibrate
 			  noStrock();
 			  fill(204);
            ellipse(displayWidth/2, displayHeight/2, circleRadi*2, circleRad*2); //draw circle based on data value
        }
+       else if (value == "End"){
+           endCode();
+           keyPressed();
+       }
     }
 }
 
 void keyPressed() {
-  endCode();
   output.flush();  // Writes the remaining data to the file
   output.close();  // Finishes the file
   exit();  // Stops the program
@@ -73,4 +76,20 @@ void endCode(){
   output.print ("M84;");
   output.print ("G90;");
   output.print ("M117 TAZ Ready.;");
+}
+/* Structure for X Y Z motion */
+void xAxis(int val){
+  output.print ("G1 X");
+  output.print (val);
+  output.print (";");
+}
+void yAxis(int val){
+  output.print ("G1 Y");
+  output.print (val);
+  output.print (";");
+}
+void zAxis(int val){
+  output.print ("G1 Z");
+  output.print (val);
+  output.print (";");
 }
