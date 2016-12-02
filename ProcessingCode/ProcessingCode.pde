@@ -18,9 +18,9 @@ int circleRad = 0;
 void setup() {
 
 	size(640, 360); //prepare screen
-   mySerial = new Serial( this, Serial.list()[0], 9600 );
-   output = createWriter( "test.gcode" );
-   startCode();
+  mySerial = new Serial( this, Serial.list()[0], 9600 );
+  output = createWriter( "test.gcode" );
+  startCode();
 }
 
 void draw() {
@@ -33,12 +33,12 @@ void draw() {
       // noStrock();
       fill(0);
       ellipse(320, 180, circleRad*2, circleRad*2); //draw circle based on data value
-      }
-      else if (value == 21212){
+    }
+    else if (value == 21212){
       endCode();
       keyPressed();
-      }
-   }
+    }
+  }
 }
 
 void keyPressed() {
