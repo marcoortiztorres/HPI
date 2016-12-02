@@ -26,21 +26,19 @@ void setup() {
 void draw() {
   background(51);
   if (mySerial.available() > 0 ) {
-       int value = mySerial.read();
-       if ( value >= 0) {
-           output.println( value );
-           circleRad = value; //Integer.parseInt(value)/3; //update data input and calibrate
-           // noStrock();
-           fill(0);
-           ellipse(320, 180, circleRad*2, circleRad*2); //draw circle based on data value
-           //ellipse(10, 180, 200,300); //draw circle based on data value
-       
-       }
-       /* else if (value == "End"){
-           endCode();
-           keyPressed();
-       }*/
-    }
+    int value = mySerial.read();
+    if ( value >= 0) {
+      xAxis(value);
+      circleRad = value; //Integer.parseInt(value)/3; //update data input and calibrate
+      // noStrock();
+      fill(0);
+      ellipse(320, 180, circleRad*2, circleRad*2); //draw circle based on data value
+      }
+      else if (value == 21212){
+      endCode();
+      keyPressed();
+      }
+   }
 }
 
 void keyPressed() {
