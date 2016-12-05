@@ -29,8 +29,7 @@ void draw() {
     int value = mySerial.read();
     if ( value >= 0) {
       xAxis(value);
-      circleRad = value; //Integer.parseInt(value)/3; //update data input and calibrate
-      // noStrock();
+      circleRad = value; 
       fill(0);
       ellipse(320, 180, circleRad*2, circleRad*2); //draw circle based on data value
     }

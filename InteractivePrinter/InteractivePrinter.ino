@@ -12,13 +12,11 @@
  *               http://electronics.stackexchange.com/questions/54/saving-arduino-sensor-data-to-a-text-file
  *               https://learn.sparkfun.com/tutorials/connecting-arduino-to-processing
  ==================================================== */
-#include <SD.h>
 
-int ButtonPin1 = A1;
-int ButtonPin2 = A2;
-int ButtonPin3 = A3;
-int LightPin = A4;
-//int tempPin = A4;
+int ButtonPin1 = A2;
+int ButtonPin2 = A4;
+int ButtonPin3 = A5;
+int LightPin = A3;
 
 int buttonValue1;
 int buttonValue2;
@@ -31,10 +29,7 @@ void setup()
   pinMode(ButtonPin2, INPUT);
   pinMode(ButtonPin3, INPUT);
   pinMode(LightPin, INPUT);
-  // pinMode(tempPin, INPUT);
   
-  pinMode(A5, OUTPUT);
-  digitalWrite(A5, HIGH);
   Serial.begin(9600);
 }
 
@@ -44,18 +39,20 @@ void loop()
   buttonValue2 = digitalRead(ButtonPin2);
   buttonValue3 = digitalRead(ButtonPin3);
   lightValue = analogRead(LightPin);
+  int lightConversion = lightValue/3;
+
   
-  if (lightValue > 300 or lightValue < 200){
+  if (lightValue > 250){
     if(buttonValue1 == HIGH){
       Serial.println(lightConversion);
     }
     else if(buttonValue2 == HIGH){
       Serial.println(lightConversion);
     }
-    else if(buttonValue3 == HIGH){
-      Serial.println("End");
-    }
+  }
+  else if(buttonValue3 == HIGH){
+    Serial.println(21212);
   }
 
-  delay(200);
+  delay(100);
 }
