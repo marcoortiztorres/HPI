@@ -14,9 +14,9 @@
  ==================================================== */
 
 int ButtonPin1 = A2;
-int ButtonPin2 = A4;
-int ButtonPin3 = A5;
-int LightPin = A3;
+int ButtonPin2 = A3;
+int ButtonPin3 = A4;
+int LightPin = A5;
 
 int buttonValue1;
 int buttonValue2;
@@ -41,17 +41,15 @@ void loop()
   lightValue = analogRead(LightPin);
   int lightConversion = lightValue/3;
 
-  
-  if (lightValue > 250){
+  //Serial.println(lightValue);
+  if (lightValue > 350 or lightValue < 160){
+    //Serial.println(lightValue);
     if(buttonValue1 == HIGH){
       Serial.println(lightConversion);
     }
     else if(buttonValue2 == HIGH){
       Serial.println(lightConversion);
     }
-  }
-  else if(buttonValue3 == HIGH){
-    Serial.println(21212);
   }
 
   delay(100);
