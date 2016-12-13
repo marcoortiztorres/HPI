@@ -18,6 +18,7 @@ int lightValue;
 int flexValue;
 int tempValue;
 int potValue;
+bool flag = false;
 
 void setup() {
   Serial.begin(9600);
@@ -33,20 +34,33 @@ void loop() {
   tempValue = analogRead(tempPin);
   potValue = analogRead(potPin);
   
-  if (lightValue < 910){
+  if (lightValue < 700){
     Serial.print("Light Value = ");
-    Serial.println(lightValue);
+    Serial.println(2400);
+    flag = false;
+  }
+  else if (lightValue == constrain(lightValue,800,900)){
+    Serial.print("Light Value = ");
+    Serial.println(1200);
+    flag = false;
+  }
+  else if (lightValue > 900 and flag != true){
+    Serial.print("Light Value = ");
+    Serial.println(800);
+    flag = true;
   }
   if (flexValue != constrain(flexValue, 570, 600)){
     Serial.print("Flex Value = ");
+    flexValue = (flexValue-260)/3.15;
     Serial.println(flexValue);
   }
   if (tempValue > 68){
     Serial.print("Tempature = ");
     Serial.println(tempValue);
   }
-  if (potValue != constrain(potValue, 150, 250)){
+  if (potValue != constrain(potValue, 149, 250)){
     Serial.print("Potentiometer = ");
+    potValue = potValue/7;
     Serial.println(potValue);
   }
   
